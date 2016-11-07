@@ -30,8 +30,8 @@ var AjaxPrettyUrl = (function(){
 			var objPanelAnchor = objPanelTitle.querySelector('a');
 			var strPanelText = objPanelAnchor.textContent || objAnchor.innerText;
 
-			var strDefaultStateCategory = strPanelText.toLowerCase().toString().trim(strDefaultState).replace(/\s+/g, '-');
-			var strState = strDefaultState.toLowerCase().toString().trim(strDefaultState).replace(/\s+/g, '-');
+			var strDefaultStateCategory = strPanelText.toLowerCase().trim(strDefaultState).replace(/\s+/g, '-').toString();
+			var strState = strDefaultState.toLowerCase().trim(strDefaultState).replace(/\s+/g, '-').toString();
 			var objDefaultState = {page: this.strUrl+'/'+strDefaultStateCategory+'/'+strState, url: this.strUrl + '/' + strDefaultStateCategory + '/' + strState};
 
 			//Set history on default page entry
@@ -56,7 +56,7 @@ var AjaxPrettyUrl = (function(){
 			var self = this;
 			window.History.Adapter.bind(window,'statechange',function(){
 				var objHistory = window.History,
-						objState = objHistory.getState();
+					objState = objHistory.getState();
 
 				var objElement = self.setSelector();
 				var objTrigger = objElement.querySelector('[data-state="'+objState.data.page+'"]');
@@ -71,17 +71,17 @@ var AjaxPrettyUrl = (function(){
 		ajaxCallback: function($obj){
 			var obj = $obj,
 					strObjText = obj.context.textContent || obj.context.innerText,
-					strPushState = strObjText.toLowerCase().toString().trim().replace(/\s+/g, '-'),
+					strPushState = strObjText.toLowerCase().trim().replace(/\s+/g, '-').toString(),
 
 					objPanel = this.getClosest(obj.context, '.panel'),
 					objPanelTitle = objPanel.querySelector('.panel-title'),
 					objPanelAnchor = objPanelTitle.querySelector('a'),
 					strPanelText = objPanelAnchor.textContent || objAnchor.innerText,
-					strPushStateCategory = strPanelText.toLowerCase().toString().trim(strPushState).replace(/\s+/g, '-'),
+					strPushStateCategory = strPanelText.toLowerCase().trim(strPushState).replace(/\s+/g, '-').toString(),
 					objState = {page: this.strUrl+'/'+strPushStateCategory+'/'+strPushState, url: this.strUrl + '/' + strPushStateCategory + '/' + strPushState};
 
 			var objHistory = window.History,
-					objCurrentState = objHistory.getState();
+				objCurrentState = objHistory.getState();
 
 			console.log(this.strUrl);
 
